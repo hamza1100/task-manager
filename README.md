@@ -3,7 +3,7 @@
 A simple task manager that keeps track of stuff a person has done.
 
 
-# Cloning
+# cloning
 
 clone it from the following command:
 https://github.com/hamza1100/task-manager.git
@@ -14,7 +14,7 @@ open project in your desired IDE.
 execute following command:
 https://github.com/hamza1100/task-manager.git
 
-# Running the project
+# running the project
 
 type this command in terminal to run the project.
 npm run watch.
