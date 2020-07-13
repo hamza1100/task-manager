@@ -1,13 +1,14 @@
 import * as mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/tasks', {useNewUrlParser: true});
 
-mongoose.connection.on('error', () => {
-    console.log('Failed to create a connection');
-});
+const db_link = "mongodb://mongo:27017/tasks";
 
-mongoose.connection.once('open', () => {
-    console.log('Connected Successfully!');
+mongoose.connect(db_link, (err) => {
+    if (err) {
+        console.error("Error occurred while connecting to DB!");
+    }
+    else
+        console.log("Database connection established successfully");
 });
 
 export default mongoose;
