@@ -1,7 +1,6 @@
 import { Context } from 'koa';
 import * as taskService from '../services/tasks';
-import { getProperties } from '../lib/helpers';
-import { ITasksAttributes } from '../models/tasks';
+import { TaskAttributes } from '../models/tasks';
 import { IUpdateTask } from '../interfaces/task';
 
 export const getTask = async (ctx: Context) => {
@@ -26,11 +25,12 @@ export const getAllTasks = async (ctx: Context) => {
 }
 
 export const postTask = async (ctx: Context) => {
-    const payload: ITasksAttributes = {
+    const payload: TaskAttributes = {
         task: ctx.request.body.task,
         description: ctx.request.body.description,
+        isActive: true,
+        isDeleted: false
       };
-
     const response = await taskService.create(payload);
     ctx.body = {
         meta: {

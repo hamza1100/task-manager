@@ -1,24 +1,27 @@
-// import * as mongoose from 'mongoose';
+import * as Sequelize from 'sequelize';
+import * as DataTypes from 'sequelize';
 
-import { Document, Model, Schema } from 'mongoose';
-
-import mongoose from './index';
-
-const taskSchema = new Schema({
-    task: { type: String, auto: true, required: true},
-    description: {type: String, required: true},
-    isActive: {type: Boolean, default: true},
-    isDeleted: {type: Boolean, default: false},
-    createdAt: {type: Date, default: Date.now()}
-}, {_id: true, versionKey: false, collection: 'task', });
-
-export interface ITasksAttributes {
-    task: string,
-    description: string,
-    isActive?: boolean,
-    isDeleted?: boolean
+export interface TaskAttributes {
+    task: string;
+    description: string;
+    isActive: boolean;
+    isDeleted: boolean;
 }
 
-export interface ITaskModel extends Document, ITasksAttributes {  }
+export interface TaskInstance extends Sequelize.Instance<TaskAttributes> {
+    task: string;
+    description: string;
+    isActive: boolean;
+    isDeleted: boolean;
+}
 
-export const Task: Model<ITaskModel> = mongoose.model('task', taskSchema);
+export interface TaskModel extends Sequelize.Model<TaskInstance, TaskAttributes> { }
+
+export function define(conn: Sequelize.Sequelize): TaskModel {
+    return conn.define('Task', {
+        task: DataTypes.STRING,
+        description: DataTypes.STRING,
+        isActive: DataTypes.BOOLEAN,
+        isDeleted: DataTypes.BOOLEAN
+    });
+}

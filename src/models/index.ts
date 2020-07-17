@@ -1,14 +1,31 @@
-import * as mongoose from 'mongoose';
+import * as Sequelize from 'sequelize';
+import * as tasks from './tasks';
 
-
-const db_link = "mongodb://mongo:27017/tasks";
-
-mongoose.connect(db_link, (err) => {
-    if (err) {
-        console.error("Error occurred while connecting to DB!");
-    }
-    else
-        console.log("Database connection established successfully");
+const sequelize = new Sequelize('tasks', 'postgres', '10pearls', {
+    host: 'localhost', // check this for docker
+    dialect: 'postgres'
 });
 
-export default mongoose;
+try {
+    sequelize.authenticate().then(() => {
+        console.log('Connection has been established successfully');
+    });
+} catch (error) {
+    console.error('Unable to Connect to the database')
+}
+
+interface IModels extends Sequelize.Models {
+    Task: tasks.TaskModel
+}
+
+export const Models: IModels = {
+    Task: tasks.define(sequelize)
+}
+
+syncTaskTable();
+
+async function syncTaskTable() {
+    await Models.Task.sync();
+}
+
+export const Database: Sequelize.Sequelize = sequelize;

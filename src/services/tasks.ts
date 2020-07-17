@@ -1,6 +1,6 @@
 
 import * as taskRepo from '../repositories/tasks';
-import { ITasksAttributes } from "../models/tasks";
+import { TaskAttributes } from "../models/tasks";
 import { IUpdateTask } from '../interfaces/task';
 import { createTaskSchema, getSingleTaskSchema, updateTaskSchema, deleteTaskSchema } from '../validations/schemas/tasks';
 import * as Boom from 'boom';
@@ -18,7 +18,7 @@ export const getAll = async () => {
     return await taskRepo.getAll();
 }
 
-export const create = async (payload: ITasksAttributes) => {
+export const create = async (payload: TaskAttributes) => {
     const { error, value } = createTaskSchema.validate(payload);
     if (error) {
         return Boom.notFound(error.message);

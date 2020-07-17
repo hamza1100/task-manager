@@ -3,7 +3,9 @@ import { string, boolean } from "@hapi/joi";
 
 export const createTaskSchema = Joi.object({
     task: string().required(),
-    description: string().required()
+    description: string().required(),
+    isActive: boolean(),
+    isDeleted: boolean()
 });
 
 export const updateTaskSchema = Joi.object({

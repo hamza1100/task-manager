@@ -22,7 +22,10 @@
     "koa-router": "^7.4.0",
     "mongoose": "^5.9.20",
     "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
     "request": "^2.87.0",
+    "sequelize": "^4.44.4",
     "ts-node": "^7.0.0"
   },
   "jest": {
@@ -52,6 +55,7 @@
     "@types/koa-router": "^7.0.30",
     "@types/mongoose": "^5.7.29",
     "@types/nodemon": "^1.19.0",
+    "@types/sequelize": "^4.28.9",
     "jest": "^23.3.0",
     "ts-jest": "^23.0.0",
     "tslint": "^5.10.0",
